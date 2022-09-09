@@ -62,10 +62,11 @@ Ya ubicados en la interface denominada Main.c prodremos comenzar a escribir el c
 
 lo primero sera definir las variables principales en el espacio que el hardware creo siendo este debajo de la seccion “int main void”. 
 
-| uint16_t raw_data;
+```markdown
+uint16_t raw_data;
 uint16_t volt[4];
-uint16_t volt2[4]; |
-| --- |
+uint16_t volt2[4];
+```
 
 raw_data corresponde con nuestro dato de entrada que se recibira.
 
@@ -75,21 +76,24 @@ volt2 es el segundo voltaje medido pero ya filtrado.
 
 A continuacion de debe escribir la linea de codigo que despertara al ADC. utilizando el segundo espacion creado por hardware. 
 
-| HAL_ADC_start (&hadc1);                                                  //ADC start  |
-| --- |
+```markdown
+HAL_ADC_start (&hadc1);                                                  //ADC start
+```
 
 Ademas dentro de este mismo espacio sera utilizado para definir las variables utilzadas para el filtro:
 
-| float V1;                                                                   
+```markdown
+float V1;                                                                   
 float A1;
 int A2=0, A3=0, A4=0;
 int N=4;
-float filtro; |
-| --- |
+float filtro; 
+```
 
 Seguido podremos escribir el inicio del ADC y el filtro en la seccion “While” del codigo.
 
-|                                                 //inicio ADC                                                                                                                 HAL_ADC_PollForConversion(&hadc1, HAL_MAX_DELAY);
+```markdown
+                                                //inicio ADC                                                                                                                 HAL_ADC_PollForConversion(&hadc1, HAL_MAX_DELAY);
 raw_data = HAL_ADC_GetValue(&hadc1);
                                                 //fin adc
                                                 //valor voltaje sin filtrar
@@ -117,8 +121,8 @@ gcvt(filtro, 4, volt2);	              //v1:voltaje adquirido, 4:largo, volt2:tra
 lcd_put_cur(1,11);
 lcd_send_string (volt2);
 HAL_Delay(1000);
-                                              //Fin envio de informacion |
-| --- |
+                                              //Fin envio de informacion
+```
 
 Ahora se podria utilizar el modo debbug, ubicado en la parte superior con el icono verde en forma de bichito, esto nos servira para asegurarnos de que el codigo no tenga errores grabes ademas de poder ver mas detalladamente como los datos de las variables van cambiando y  si todo se encuentra dentro de los resultados esperados.
 
